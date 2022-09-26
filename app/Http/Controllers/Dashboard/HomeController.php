@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller {
@@ -11,6 +12,7 @@ class HomeController extends Controller {
      * @return void
      */
     public function __construct() {
+        $this->middleware('admin.auth');
     }
 
     /**
@@ -19,6 +21,6 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('home');
+        return view('dashboard.home');
     }
 }
