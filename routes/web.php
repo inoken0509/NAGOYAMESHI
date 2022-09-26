@@ -21,6 +21,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [Dashboard\Auth\LoginController::class, 'login'])->name('login');
-
     Route::get('/', [Dashboard\HomeController::class, 'index'])->name('home');
+});
+
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'admin.auth'], function () {
+    Route::get('users', [dashboard\UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [dashboard\UserController::class, 'show'])->name('users.show');
 });
