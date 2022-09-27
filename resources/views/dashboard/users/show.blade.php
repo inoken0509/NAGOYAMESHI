@@ -1,13 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('content')
     <div class="col container">
-        <div class="row justify-content-center">
-            <div class="col-xl-7 col-lg-8 col-md-9">
-                <a href="{{ route('dashboard.users.index') }}">< 戻る</a>
-
-
-                <h1 class="mb-4 text-center">会員詳細</h1>            
+        <div class="row">                            
+                <h1 class="mb-3">会員詳細</h1>       
+                
+                <a href="{{ route('dashboard.users.index') }}" class="mb-2">< 戻る</a>
 
                 <div class="container mb-4">
                     <div class="row pb-2 mb-2 border-bottom">
@@ -70,8 +68,7 @@
                         </div>
                     </div>                    
                                        
-                </div>                                               
-            </div>                          
+                </div>                                                                                  
         </div>
     </div>       
 @endsection

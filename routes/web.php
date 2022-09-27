@@ -27,4 +27,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'admin.auth'], function () {
     Route::get('users', [dashboard\UserController::class, 'index'])->name('users.index');
     Route::get('users/{user}', [dashboard\UserController::class, 'show'])->name('users.show');
+    Route::resource('restaurants', dashboard\RestaurantController::class);
 });

@@ -15,6 +15,8 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <link href="{{ asset('/css/nagoyameshi.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -22,10 +24,10 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-3">            
+                <div class="col-12 col-md-3">            
                     @include('layouts.sidebar')
                 </div>
-                <div class="col-3">
+                <div class="col">
                     <main class="py-4">            
                         @yield('content')
                     </main>            
