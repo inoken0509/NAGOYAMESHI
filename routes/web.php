@@ -28,4 +28,5 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'ad
     Route::get('users', [dashboard\UserController::class, 'index'])->name('users.index');
     Route::get('users/{user}', [dashboard\UserController::class, 'show'])->name('users.show');
     Route::resource('restaurants', dashboard\RestaurantController::class);
+    Route::resource('categories', dashboard\CategoryController::class)->except('show', 'create');
 });

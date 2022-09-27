@@ -21,7 +21,7 @@
     </div>
 
     @if (session('flash_message')) 
-        <div class="text-center">
+        <div>
             <p class="text-success">{{ session('flash_message') }}</p>                    
         </div>                                   
     @endif                                             

@@ -12,7 +12,7 @@
 
     <h2>カテゴリ管理</h2>
     <div class="d-flex flex-column mb-2">
-        <label class="samuraimart-sidebar-category-label">カテゴリ一覧</label>        
+        <label class="samuraimart-sidebar-category-label"><a href="{{ route('dashboard.categories.index') }}">カテゴリ一覧</a></label>        
     </div>    
 
     <h2>その他</h2>
