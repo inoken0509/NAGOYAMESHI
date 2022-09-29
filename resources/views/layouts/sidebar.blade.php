@@ -17,6 +17,6 @@
 
     <h2>その他</h2>
     <div class="d-flex flex-column mb-2">
-        <label class="samuraimart-sidebar-category-label">会社情報管理</label>        
+        <label class="samuraimart-sidebar-category-label"><a href="{{ route('dashboard.companies.index') }}">会社情報管理</a></label>        
     </div>
 </div>

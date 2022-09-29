@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Restaurant>
@@ -16,6 +17,11 @@ class RestaurantFactory extends Factory {
     public function definition() {
         $dummy_lowest_price = floor(mt_rand(500, 10000) / 500) * 500;
 
+        $categories = Category::all();
+        $number_of_categories = Category::count() - 1;
+        $random_number = mt_rand(0, $number_of_categories);
+        $category_id = $categories[$random_number]->id;
+
         return [
             'name' => $this->faker->name,
             'image' => basename('public/restaurants/dummy.jpg'),
@@ -28,6 +34,7 @@ class RestaurantFactory extends Factory {
             'address' => $this->faker->prefecture . ' ' . $this->faker->city . $this->faker->streetAddress . ' ' . $this->faker->secondaryAddress,
             'phone_number' => $this->faker->phoneNumber,
             'regular_holiday' => 'なし',
+            'category_id' => $category_id,
         ];
     }
 }

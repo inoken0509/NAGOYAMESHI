@@ -3,13 +3,7 @@
 @section('content')                                                                          
     <h1 class="mb-3">店舗詳細</h1>               
 
-    <a href="{{ route('dashboard.restaurants.index') }}">< 戻る</a>   
-
-    @if (session('flash_message'))
-        <div class="alert alert-info" role="alert">
-            <p class="mb-0">{{ session('flash_message') }}</p>
-        </div>
-    @endif                 
+    <a href="{{ route('dashboard.restaurants.index') }}">< 戻る</a>                  
 
     <div class="container mt-2 mb-4">
         <div class="row pb-2 mb-2 border-bottom">
@@ -110,6 +104,16 @@
             <div class="col d-flex"> 
                 <div>{{ $restaurant->regular_holiday }}</div>                           
             </div>
-        </div>                                      
+        </div>    
+        
+        <div class="row pb-2 mb-2 border-bottom">
+            <div class="col-2">
+                <span class="fw-bold">カテゴリ</span>
+            </div>
+
+            <div class="col d-flex"> 
+                <div>{{ $restaurant->category->name }}</div>                           
+            </div>
+        </div>         
     </div>                                                                                     
 @endsection

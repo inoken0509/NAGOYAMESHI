@@ -111,7 +111,23 @@
             <div>
                 <input type="text" class="form-control" id="regular_holiday" name="regular_holiday" value="{{ old('regular_holiday') }}" required>
             </div>                    
-        </div>                    
+        </div>   
+        
+        <div class="col-lg-7 form-group mb-4">
+            <label for="category_id" class="col-md-5 col-form-label text-md-left fw-bold">カテゴリ</label>
+
+            <div>
+                <select class="form-control form-select" id="category_id" name="category_id">                                                
+                    @foreach ($categories as $category)                                        
+                        @if ($category->id == old("category_id"))                                        
+                            <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                        @else
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
+                    @endforeach                              
+                </select>                                
+            </div>                    
+        </div>         
 
         <div class="col-lg-7 form-group mb-4">
             <button type="submit" class="btn btn-primary text-white shadow-sm w-100">登録</button>

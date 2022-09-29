@@ -16,6 +16,7 @@
 
     <form method="POST" action="{{ route('dashboard.restaurants.update', $restaurant) }}" class="row" enctype="multipart/form-data">
         @csrf
+        @method('patch')
         <div class="col-lg-7 form-group mb-3">
             <label for="name" class="col-md-5 col-form-label text-md-left fw-bold">店名</label>                    
             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $restaurant->name) }}" required>                    
@@ -111,10 +112,36 @@
             <div>
                 <input type="text" class="form-control" id="regular_holiday" name="regular_holiday" value="{{ old('regular_holiday', $restaurant->regular_holiday) }}" required>
             </div>                    
-        </div>                    
+        </div>   
+        
+        <div class="col-lg-7 form-group mb-4">
+            <label for="category_id" class="col-md-5 col-form-label text-md-left fw-bold">カテゴリ</label>
+
+            <div>
+                <select class="form-control form-select" id="category_id" name="category_id">  
+                    @if (old('category_id'))                                        
+                        @foreach ($categories as $category)                                        
+                            @if ($category->id == old("category_id"))                                        
+                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                            @else
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endif
+                        @endforeach
+                    @else
+                        @foreach ($categories as $category)                                        
+                            @if ($category->id == $restaurant->category->id)                                        
+                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                            @else
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endif
+                        @endforeach                    
+                    @endif
+                </select>                                
+            </div>                    
+        </div>        
 
         <div class="col-lg-7 form-group mb-4">
-            <button type="submit" class="btn btn-primary text-white shadow-sm w-100">登録</button>
+            <button type="submit" class="btn btn-primary text-white shadow-sm w-100">編集</button>
         </div>
     </form>            
 

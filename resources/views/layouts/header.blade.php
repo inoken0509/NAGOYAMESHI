@@ -1,7 +1,7 @@
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light nagoyameshi-navbar">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('/images/logo.png') }}" alt="ロゴ" class="logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -15,16 +15,17 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a href="{{ route('company') }}" class="nav-link">会社情報</a></li>
                         <!-- Authentication Links -->
                         @if (Auth::guard('admin')->check())
                             <li class="nav-item">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="nav-link" href="{{ route('dashboard.logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('dashboard.logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                             </li>

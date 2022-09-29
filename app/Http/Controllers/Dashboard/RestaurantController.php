@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller {
@@ -30,7 +31,8 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('dashboard.restaurants.create');
+        $categories = Category::all();
+        return view('dashboard.restaurants.create', compact('categories'));
     }
 
     /**
@@ -45,8 +47,8 @@ class RestaurantController extends Controller {
             'description' => 'required',
             'lowest_price' => 'required|numeric|lt:highest_price',
             'highest_price' => 'required|numeric|gt:lowest_price',
-            'opening_hour' => 'required|lt:closing_hour',
-            'closing_hour' => 'required|gt:opening_hour',
+            'opening_hour' => 'required|digits_between:1,2|lt:closing_hour',
+            'closing_hour' => 'required|digits_between:1,2|gt:opening_hour',
             'postal_code1' => 'required|digits:3',
             'postal_code2' => 'required|digits:4',
             'address' => 'required',
@@ -71,6 +73,7 @@ class RestaurantController extends Controller {
         $restaurant->address = $request->input('address');
         $restaurant->phone_number = $request->input('phone_number');
         $restaurant->regular_holiday = $request->input('regular_holiday');
+        $restaurant->category_id = $request->input('category_id');
         $restaurant->save();
 
         return redirect()->route('dashboard.restaurants.index')->with('flash_message', '店舗情報を登録しました。');
@@ -93,7 +96,8 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Restaurant $restaurant) {
-        return view('dashboard.restaurants.edit', compact('restaurant'));
+        $categories = Category::all();
+        return view('dashboard.restaurants.edit', compact('restaurant', 'categories'));
     }
 
     /**
@@ -109,8 +113,8 @@ class RestaurantController extends Controller {
             'description' => 'required',
             'lowest_price' => 'required|numeric|lt:highest_price',
             'highest_price' => 'required|numeric|gt:lowest_price',
-            'opening_hour' => 'required|lt:closing_hour',
-            'closing_hour' => 'required|gt:opening_hour',
+            'opening_hour' => 'required|digits_between:1,2|lt:closing_hour',
+            'closing_hour' => 'required|digits_between:1,2|gt:opening_hour',
             'postal_code1' => 'required|digits:3',
             'postal_code2' => 'required|digits:4',
             'address' => 'required',
@@ -132,9 +136,10 @@ class RestaurantController extends Controller {
         $restaurant->address = $request->input('address');
         $restaurant->phone_number = $request->input('phone_number');
         $restaurant->regular_holiday = $request->input('regular_holiday');
+        $restaurant->category_id = $request->input('category_id');
         $restaurant->save();
 
-        return redirect()->route('admin.restaurants.show', $restaurant)->with('flash_message', '店舗情報を編集しました。');
+        return redirect()->route('dashboard.restaurants.index')->with('flash_message', '店舗情報を編集しました。');
     }
 
     /**

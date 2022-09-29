@@ -3,11 +3,7 @@
 @section('content')    
     <h1 class="mb-3">カテゴリ編集</h1>  
     
-    @if (session('flash_message')) 
-        <div>
-            <p class="text-success">{{ session('flash_message') }}</p>                    
-        </div>                                   
-    @endif    
+    <a href="{{ route('dashboard.categories.index') }}">< 戻る</a>   
 
     @if ($errors->any())
         <div class="alert alert-danger">

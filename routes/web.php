@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard;
+use App\Models\Company;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +19,23 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/company', function () {
+    return view('company.index', [
+        'company' => Company::first()
+    ]);
+})->name('company');
+
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::post('login', [Dashboard\Auth\LoginController::class, 'login'])->name('login');
+    Route::post('logout', [Dashboard\Auth\LoginController::class, 'logout'])->name('logout');
     Route::get('/', [Dashboard\HomeController::class, 'index'])->name('home');
 });
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.', 'middleware' => 'admin.auth'], function () {
-    Route::get('users', [dashboard\UserController::class, 'index'])->name('users.index');
-    Route::get('users/{user}', [dashboard\UserController::class, 'show'])->name('users.show');
-    Route::resource('restaurants', dashboard\RestaurantController::class);
-    Route::resource('categories', dashboard\CategoryController::class)->except('show', 'create');
+    Route::get('users', [Dashboard\UserController::class, 'index'])->name('users.index');
+    Route::get('users/{user}', [Dashboard\UserController::class, 'show'])->name('users.show');
+    Route::resource('restaurants', Dashboard\RestaurantController::class);
+    Route::resource('categories', Dashboard\CategoryController::class)->except('show', 'create');
+    Route::resource('companies', Dashboard\CompanyController::class)->only(['index', 'edit', 'update']);
 });

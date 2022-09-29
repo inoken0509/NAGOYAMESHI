@@ -34,6 +34,18 @@ body {
   letter-spacing: 0.11px;
 }
 
+.logo {
+  height: 40px;
+}
+
+body.top-page {
+  background: url(../images/background.jpg) center center / cover no-repeat fixed;
+}
+
+.nagoyameshi-navbar {
+  background-color: #F2E6D8;
+}
+
 td {
   word-break: break-word;
 }
@@ -44,4 +56,16 @@ td {
 
 .search-box {
   max-width: 360px;
+}
+
+.search-area {
+  background-color: #F8F2EB;
+}
+
+.category-select {
+  width: 200px;
+}
+
+.top-wrapper {
+  height: 80vh;
 }
