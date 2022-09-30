@@ -50,6 +50,7 @@ class RestaurantController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Restaurant $restaurant) {
-        return view('restaurants.show', compact('restaurant'));
+        $reviews = $restaurant->reviews()->paginate(5);
+        return view('restaurants.show', compact('restaurant', 'reviews'));
     }
 }

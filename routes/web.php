@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ReviewController;
 use App\Models\Company;
 
 /*
@@ -27,6 +28,11 @@ Route::get('/company', function () {
 })->name('company');
 
 Route::resource('restaurants', RestaurantController::class)->only(['index', 'show']);
+
+Route::middleware('verified')->group(function () {
+});
+
+Route::resource('restaurants.reviews', ReviewController::class)->only('create', 'store', 'edit', 'update', 'destroy');
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('login');
