@@ -69,3 +69,7 @@ td {
 .top-wrapper {
   height: 80vh;
 }
+
+.sort-box {
+  max-width: 160px;
+}

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\RestaurantController;
 use App\Models\Company;
 
 /*
@@ -24,6 +25,8 @@ Route::get('/company', function () {
         'company' => Company::first()
     ]);
 })->name('company');
+
+Route::resource('restaurants', RestaurantController::class)->only(['index', 'show']);
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('login');

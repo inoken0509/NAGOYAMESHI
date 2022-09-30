@@ -27,7 +27,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="search-area px-5 py-4">
                         <h1 class="mt-2">名古屋のB級グルメを探す</h1>
-                        <form method="GET" action="{{ route('dashboard.restaurants.index') }}" class="search-box mb-3">
+                        <form method="GET" action="{{ route('restaurants.index') }}" class="search-box mb-3">
                             <div class="d-flex flex-wrap flex-sm-nowrap">
                                 <div class="me-2 mb-2">
                                     <input type="text" class="form-control" placeholder="店名" name="keyword">
