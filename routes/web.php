@@ -18,7 +18,7 @@ use App\Models\Company;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -31,14 +31,13 @@ Route::get('/company', function () {
 Route::resource('restaurants', RestaurantController::class)->only(['index', 'show']);
 
 Route::middleware('verified')->group(function () {
+    Route::resource('restaurants.reviews', ReviewController::class)->only('create', 'store', 'edit', 'update', 'destroy');
+    Route::resource('restaurants.reservations', ReservationController::class)->only(['create', 'store']);
+    Route::resource('reservations', ReservationController::class)->only(['index', 'destroy']);
+    Route::get('/mypage', function () {
+        return view('mypage.index');
+    })->name('mypage');
 });
-
-Route::resource('restaurants.reviews', ReviewController::class)->only('create', 'store', 'edit', 'update', 'destroy');
-Route::resource('restaurants.reservations', ReservationController::class)->only(['create', 'store']);
-Route::resource('reservations', ReservationController::class)->only(['index', 'destroy']);
-Route::get('/mypage', function () {
-    return view('mypage.index');
-})->name('mypage');
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     Route::get('login', [Dashboard\Auth\LoginController::class, 'showLoginForm'])->name('login');
