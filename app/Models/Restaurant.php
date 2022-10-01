@@ -18,5 +18,13 @@ class Restaurant extends Model {
         return $this->hasMany(Review::class);
     }
 
+    public function reservations() {
+        return $this->hasMany(Reservation::class);
+    }
+
     public $sortable = ['lowest_price', 'highest_price'];
+
+    public function scoreSortable($query, $direction) {
+        return $query->orderBy('reviews_avg_score', $direction);
+    }
 }

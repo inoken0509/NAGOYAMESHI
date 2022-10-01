@@ -32,7 +32,7 @@
                 @if ($category_id)
                     <input type="hidden" name="category_id" value="{{ $category_id }}">
                 @endif                                                                 
-                <select class="form-select" name="sort" onChange="this.form.submit();">
+                <select class="form-select" name="sort_type" onChange="this.form.submit();">
                     @foreach ($sorts as $key => $value)
                         @if ($sorted === $value)
                             <option value="{{ $value }}" selected>{{ $key }}</option>
@@ -47,6 +47,7 @@
                 <div class="col">
                     <a href="{{ route('restaurants.show', $restaurant) }}"><img src="{{ asset('storage/restaurants/' . $restaurant->image) }}" class="w-100"></a>
                     <a href="{{ route('restaurants.show', $restaurant) }}" class="text-decoration-none"><h2 class="mb-0">{{ $restaurant->name }}</h2></a>
+                    <p class="text-warning mb-2">{{ str_repeat('★', round($restaurant->reviews_avg_score)) }}</p>
                     <p class="mb-0">{{ $restaurant->category->name }}</p>
                     <p>{{ $restaurant->lowest_price }}円～{{ $restaurant->highest_price }}円</p>
                 </div>            

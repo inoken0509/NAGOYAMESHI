@@ -18,8 +18,8 @@ class RestaurantFactory extends Factory {
         $dummy_lowest_price = floor(mt_rand(500, 10000) / 500) * 500;
 
         $categories = Category::all();
-        $number_of_categories = Category::count() - 1;
-        $random_number = mt_rand(0, $number_of_categories);
+        $number_categories = Category::count() - 1;
+        $random_number = mt_rand(0, $number_categories);
         $category_id = $categories[$random_number]->id;
 
         return [

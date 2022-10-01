@@ -6,6 +6,10 @@
             <div class="col-xxl-6 col-xl-7 col-lg-8 col-md-10">
                 <div class="container mb-4">
                     <h1 class="mb-3">会社情報</h1> 
+
+                    <div class="mb-3">
+                        <a href="{{ route('home') }}">< 戻る</a>     
+                    </div>                     
                     
                     <table class="table table-bordered">
                         <tr>
