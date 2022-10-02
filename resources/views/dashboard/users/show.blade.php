@@ -66,6 +66,22 @@
                         <div class="col">
                             <span>{{ $user->phone_number }}</span>
                         </div>
+                    </div>  
+                    
+                    <div class="row pb-2 mb-2 border-bottom">
+                        <div class="col-3">
+                            <span class="fw-bold">会員種別</span>
+                        </div>
+
+                        <div class="col">
+                            <span>
+                                @if ($subscriptions_query->where('user_id', $user->id)->exists() && $subscriptions_query->where('user_id', $user->id)->value('stripe_status') === 'active') 
+                                    有料会員
+                                @else
+                                    無料会員
+                                @endif                                
+                            </span>
+                        </div>
                     </div>                    
                                        
                 </div>                                                                                  

@@ -22,7 +22,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">氏名</th>
                 <th scope="col">メールアドレス</th>
-                <th scope="col">電話番号</th>                                                                                  
+                <th scope="col">電話番号</th>  
+                <th scope="col">会員種別</th>                                                                                  
             </tr>
         </thead>   
         <tbody>                 
@@ -31,7 +32,14 @@
                     <td>{{ $user->id }}</td>
                     <td><a href="{{ route('dashboard.users.show', $user) }}">{{ $user->name }}</a></td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone_number }}</td>                                                                
+                    <td>{{ $user->phone_number }}</td>  
+                    <td>
+                        @if ($subscriptions_query->where('user_id', $user->id)->exists() && $subscriptions_query->where('user_id', $user->id)->value('stripe_status') === 'active') 
+                            有料会員
+                        @else
+                            無料会員
+                        @endif
+                    </td>                                                                                    
                 </tr>  
             @endforeach
         </tbody>
