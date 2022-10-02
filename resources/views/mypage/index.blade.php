@@ -11,7 +11,7 @@
                 </div>    
 
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action fs-5 fw-bold py-3">
+                    <a href="{{ route('user.edit') }}" class="list-group-item list-group-item-action fs-5 fw-bold py-3">
                         会員情報編集
                     </a>
                     <a href="{{ route('reservations.index') }}" class="list-group-item list-group-item-action fs-5 fw-bold py-3">予約一覧</a>

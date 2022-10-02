@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\UserController;
 use App\Models\Company;
 
 /*
@@ -37,6 +38,8 @@ Route::middleware('verified')->group(function () {
     Route::get('/mypage', function () {
         return view('mypage.index');
     })->name('mypage');
+    Route::get('user/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::patch('user', [UserController::class, 'update'])->name('user.update');
 });
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
