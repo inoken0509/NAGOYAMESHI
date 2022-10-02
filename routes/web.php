@@ -6,6 +6,7 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubscriptionController;
 use App\Models\Company;
 
 /*
@@ -32,14 +33,21 @@ Route::get('/company', function () {
 Route::resource('restaurants', RestaurantController::class)->only(['index', 'show']);
 
 Route::middleware('verified')->group(function () {
-    Route::resource('restaurants.reviews', ReviewController::class)->only('create', 'store', 'edit', 'update', 'destroy');
-    Route::resource('restaurants.reservations', ReservationController::class)->only(['create', 'store']);
-    Route::resource('reservations', ReservationController::class)->only(['index', 'destroy']);
+    Route::resource('restaurants.reviews', ReviewController::class)->only('create', 'store', 'edit', 'update', 'destroy')->middleware('subscribed');
+    Route::resource('restaurants.reservations', ReservationController::class)->only(['store'])->middleware('subscribed');
+    Route::resource('reservations', ReservationController::class)->only(['index', 'destroy'])->middleware('subscribed');
     Route::get('/mypage', function () {
         return view('mypage.index');
     })->name('mypage');
     Route::get('user/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::patch('user', [UserController::class, 'update'])->name('user.update');
+
+    Route::get('subscription', [SubscriptionController::class, 'create'])->name('subscription.create');
+    Route::post('subscription', [SubscriptionController::class, 'store'])->name('subscription.store');
+    Route::get('subscription/edit', [SubscriptionController::class, 'edit'])->middleware('subscribed')->name('subscription.edit');
+    Route::post('subscription/update', [SubscriptionController::class, 'update'])->middleware('subscribed')->name('subscription.update');
+    Route::get('subscription/cancel', [SubscriptionController::class, 'cancel'])->middleware('subscribed')->name('subscription.cancel');
+    Route::post('subscription/destroy', [SubscriptionController::class, 'destroy'])->middleware('subscribed')->name('subscription.destroy');
 });
 
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
