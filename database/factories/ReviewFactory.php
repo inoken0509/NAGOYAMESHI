@@ -28,7 +28,7 @@ class ReviewFactory extends Factory {
 
         return [
             'score' => mt_rand(1, 5),
-            'comment' => '好みの味でした。また行きたいです。',
+            'comment' => '名古屋では有名な格安で焼肉食べ放題のお店。タイミングよく仕事で行く機会があったので、地元の友人と一緒に来店しました。店内は広くゆったりとできます。',
             'restaurant_id' => $restaurant_id,
             'user_id' => $user_id,
         ];

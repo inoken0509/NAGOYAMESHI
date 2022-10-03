@@ -52,7 +52,7 @@ class RestaurantController extends Controller {
             'postal_code1' => 'required|digits:3',
             'postal_code2' => 'required|digits:4',
             'address' => 'required',
-            'phone_number' => 'required|digits_between:10,11',
+            'phone_number' => 'required',
             'regular_holiday' => 'required',
         ]);
 
@@ -118,7 +118,7 @@ class RestaurantController extends Controller {
             'postal_code1' => 'required|digits:3',
             'postal_code2' => 'required|digits:4',
             'address' => 'required',
-            'phone_number' => 'required|digits_between:10,11',
+            'phone_number' => 'required',
             'regular_holiday' => 'required',
         ]);
 
